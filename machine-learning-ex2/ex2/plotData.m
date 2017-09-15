@@ -13,9 +13,10 @@ figure; hold on;
 %
 
 
+negIndex = find(y == 0);
+posIndex = find(y == 1);
 
-
-
+plot(X(posIndex, 1), X(posIndex, 2), 'b+', X(negIndex, 1), X(negIndex, 2), 'yo');
 
 
 
