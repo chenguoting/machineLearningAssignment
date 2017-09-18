@@ -27,9 +27,7 @@ X = [ones(size(X, 1), 1) X];
 % Theta2 : num_labels x num_layer2+1
 % X : m x n+1
 
-a2 = sigmoid(X * Theta1');
-a2 = [ones(size(a2, 1), 1) a2];
-[value p] = max(a2 * Theta2', [], 2);
+a2 = Theta1 * 
 
 
 % =========================================================================
