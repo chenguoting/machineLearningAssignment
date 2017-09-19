@@ -65,28 +65,38 @@ Theta2_grad = zeros(size(Theta2));
 X = [ones(size(X, 1), 1) X];
 
 % Theta1 : hidden_layer_size x input_layer_size + 1
+% Theta2 : num_labels x hidden_layer_size + 1
 % X : m x n+1
 
 
 z2 = X * Theta1';
 a2 = sigmoid(z2);
-a2 = [ones(size(a2, 1), 1) a2];
-z3 = a2 * Theta2';
+z3 = [ones(size(a2, 1), 1) a2] * Theta2';
 a3 = sigmoid(z3);
-h = a3;
+H = a3;
 
 Y = zeros(size(y, 1), num_labels);
 for i=1:size(y, 1)
     Y(i, y(i)) = 1;
 end
 
-J = sum(sum(-Y .* log(h) - (1-Y) .* log(1-h), 2)) / m;
+J = sum(sum(-Y .* log(H) - (1-Y) .* log(1-H), 2)) / m;
 J = J + lambda/2/m * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
 
+diete = ;
+diete3 = Y - H; % m x num_labels
+diete2 = (diete3 * theta2) + sigmoidGradient(z2); % m x hidden_layer_size
+for j=1:m
+    a1 = X(j, :); % 1 x n+1
+    z2 = a1 * Theta1'; % 1 x hidden_layer_size
+    a2 = sigmoid(z2); % 1 x hidden_layer_size
+    a2 = [1 a2]; % 1 x hidden_layer_size+1
+    z3 = a2 * Theta2'; % 1 x num_labels
+    a3 = sigmoid(z3); % 1 x num_labels
+    diete3 = a3 - Y(j, :); % 1 x num_labels
+    diete2 = (diete3 * Theta2(:, 2:end)) .* sigmoidGradient(z2); % 
 
-
-
-
+end
 
 
 
