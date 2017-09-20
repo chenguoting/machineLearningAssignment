@@ -89,7 +89,8 @@ delta2 = (delta3 * Theta2(:, 2:end)) .* sigmoidGradient(z2); % m x hidden_layer_
 Theta1_grad = delta2' * [ones(size(a1, 1), 1) a1] / m;
 Theta2_grad = delta3' * [ones(size(a2, 1), 1) a2] / m;
 
-
+Theta1_grad(:, 2:end) = Theta1_grad(:, 2:end) + lambda/m*Theta1(:, 2:end);
+Theta2_grad(:, 2:end) = Theta2_grad(:, 2:end) + lambda/m*Theta2(:, 2:end);
 
 % -------------------------------------------------------------
 
