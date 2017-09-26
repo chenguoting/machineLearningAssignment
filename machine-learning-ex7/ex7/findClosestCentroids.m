@@ -23,13 +23,13 @@ idx = zeros(size(X,1), 1);
 
 % m : m x n
 
-sumV = zeros(length(centroids), 1);
+sumV = zeros(size(centroids, 1), 1);
 
 for i=1:length(idx)
-    for j=1:length(centroids)
+    for j=1:size(centroids, 1)
         sumV(j) = sum((X(i,:) - centroids(j,:)).^2);
     end
-    [v idx(i)] = min(sumV);
+    [~, idx(i)] = min(sumV);
 end
 
 
