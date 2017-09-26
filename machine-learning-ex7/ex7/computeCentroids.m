@@ -28,9 +28,10 @@ centroids = zeros(K, n);
 
 
 
-
-
-
+for i=1:K
+    [rows, cols, vals] = find(idx == i);
+    centroids(i, :) = sum(X(rows, :), 1)/length(rows);
+end
 
 
 % =============================================================
